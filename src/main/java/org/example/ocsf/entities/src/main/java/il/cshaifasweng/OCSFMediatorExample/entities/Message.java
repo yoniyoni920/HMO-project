@@ -1,8 +1,11 @@
 package org.example.ocsf.entities.src.main.java.il.cshaifasweng.OCSFMediatorExample.entities;
+
 import org.example.Entities.Clinic;
 import org.example.Entities.User;
+
 import java.io.Serializable;
 import java.sql.Time;
+import java.util.List;
 
 public class Message implements Serializable {
     /* ---------- Message Necessary Info ---------- */
@@ -16,12 +19,21 @@ public class Message implements Serializable {
     private String password;
     private String userType;
     /*----------Handling clinics----*/
+    public static List<Clinic> ClinicList;
     private Clinic clinic;
     private Time openning_hour;
     private Time closing_hour;
 
     public Message() {
         super();
+    }
+
+    public static List<Clinic> getClinicList() {
+        return ClinicList;
+    }
+
+    public static void setClinicList(List<Clinic> clinicList) {
+        ClinicList = clinicList;
     }
 
     public int getId() {

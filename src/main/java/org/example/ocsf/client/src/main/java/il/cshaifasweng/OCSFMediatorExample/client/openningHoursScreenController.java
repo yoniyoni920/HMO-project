@@ -1,14 +1,14 @@
 package org.example.ocsf.client.src.main.java.il.cshaifasweng.OCSFMediatorExample.client;
-
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.Menu;
-import javafx.scene.control.MenuItem;
-import javafx.scene.control.TextField;
-import org.example.ocsf.client.src.main.java.il.cshaifasweng.OCSFMediatorExample.client.App;
+import javafx.scene.control.*;
+import javafx.scene.input.MouseEvent;
+import org.example.Entities.Clinic;
+import org.example.ocsf.entities.src.main.java.il.cshaifasweng.OCSFMediatorExample.entities.Message;
+
+import java.io.IOException;
+import java.util.List;
 
 
 public class openningHoursScreenController {
@@ -24,7 +24,7 @@ public class openningHoursScreenController {
     private Menu ClinicsBtn;
 
     @FXML
-    private ChoiceBox<?> ClinicsList;
+    private ChoiceBox<String> ClinicsList;
 
     @FXML
     private TextField closeHourTF;
@@ -88,6 +88,38 @@ public class openningHoursScreenController {
             ChangeHoursBtn.setVisible(true);
         }
     }
+    @FXML
+    void ShowClinics(MouseEvent event) {
+       // the messege need to stay the same so ill be able to change it with input- meaby
+        Message msg = new Message();
+        msg.setAction("GetAllClinics");
+        try {
+            //not sure if this is right --I want to send the msg to server-yoni
+            SimpleClient.getClient().sendToServer(msg);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        List<Clinic> clinics = msg.getClinicList();
+        for (Clinic clinic : clinics) {
+            ClinicsList.getItems().add(clinic.getName());
+           }
+    }
+    @FXML
+    void chooseFromClinicList(MouseEvent event) {
+        Message msg = new Message();
+        msg.setAction("ShowTime");
+        try {
+            //not sure if this is right --I want to send the msg to server-yoni
+            SimpleClient.getClient().sendToServer(msg);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        ClinicsList.getItems().add(clinic.getName());
+
+    }
+
+
+
 
 }
 
