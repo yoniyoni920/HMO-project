@@ -101,10 +101,16 @@ public class App extends SimpleServer {
                     e.printStackTrace();
                 }
             }
-
-
-
-
+                if (currentMsg.getAction().equals("GetClinicFromName")) {
+                    try {
+                        serverMsg = currentMsg;
+                        serverMsg.setClinic(clinicController.getClinicByName(serverMsg.getClinicName()));
+                        serverMsg.setAction("ShowTime");
+                        client.sendToClient(serverMsg);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }

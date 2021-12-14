@@ -1,4 +1,5 @@
 package org.example.ocsf.client.src.main.java.il.cshaifasweng.OCSFMediatorExample.client;
+
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -8,6 +9,7 @@ import org.example.Entities.Clinic;
 import org.example.ocsf.entities.src.main.java.il.cshaifasweng.OCSFMediatorExample.entities.Message;
 
 import java.io.IOException;
+import java.sql.Time;
 import java.util.List;
 
 
@@ -17,6 +19,10 @@ public class openningHoursScreenController {
     @FXML
     private MenuItem ChangeAppBtn;
 */
+    @FXML
+    private TableColumn<Time, Time> OpenningHourColumn;
+    @FXML
+    private TableColumn<Time, Time> ClosingHourColumn;
     @FXML
     private Button ChangeHoursBtn;
 
@@ -107,14 +113,18 @@ public class openningHoursScreenController {
     @FXML
     void chooseFromClinicList(MouseEvent event) {
         Message msg = new Message();
-        msg.setAction("ShowTime");
+        msg.setClinicName(ClinicsList.getValue());
+        msg.setAction("GetClinicFromName");
         try {
             //not sure if this is right --I want to send the msg to server-yoni
             SimpleClient.getClient().sendToServer(msg);
         } catch (IOException e) {
             e.printStackTrace();
         }
-        ClinicsList.getItems().add(clinic.getName());
+        OpenningHourColumn.setText(String.valueOf(msg.getOpenningHour()));
+        ClosingHourColumn.setText(String.valueOf(msg.getClosingHour()));
+
+
 
     }
 

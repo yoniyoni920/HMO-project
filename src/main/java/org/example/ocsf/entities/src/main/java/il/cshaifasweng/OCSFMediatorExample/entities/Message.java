@@ -13,6 +13,7 @@ public class Message implements Serializable {
     private String action;
     private String type;
     private String error;
+    private String ClinicName;
     /* ---------- Handling users ---------- */
     private User user;
     private String username;
@@ -26,6 +27,14 @@ public class Message implements Serializable {
 
     public Message() {
         super();
+    }
+
+    public String getClinicName() {
+        return ClinicName;
+    }
+
+    public void setClinicName(String clinicName) {
+        ClinicName = clinicName;
     }
 
     public static List<Clinic> getClinicList() {
